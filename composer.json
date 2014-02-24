@@ -1,25 +1,28 @@
 {
-    "name": "yiidoc/yii2-redactor",
+    "name": "sim2github/yii2-redactor",
     "description": "Extension redactor for Yii2 Framework.",
     "keywords": ["yii2", "extension", "redactor", "WYSIWYG", "html editor", "imperavi"],
-    "homepage": "http://www.yiidoc.com/",
-    "type": "library",
+    "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiidoc/yii2-redactor/issues?state=open",
-        "wiki": "http://www.yiidoc.com/wiki/",
-        "source": "https://github.com/yiidoc/yii2-redactor"
+        "issues": "https://github.com/sim2github/yii2-redactor/issues?state=open",
+        "wiki": "https://github.com/sim2github/yii2-redactor/wiki/",
+        "source": "https://github.com/sim2github/yii2-redactor"
     },
     "authors": [
         {
             "name": "Nghia Nguyen",
             "email": "yiidevelop@hotmail.com",
             "homepage": "http://www.yiidoc.com"
+        },
+        {
+            "name": "Alexander Sergeyev",
+            "email": "sim.on@ua.fm",
         }
     ],
     "autoload": {
-        "psr-0": {
-            "yii\\redactor\\": "/"
+        "psr-4": {
+            "imperavi\\": "/"
         }
     },
     "minimum-stability": "dev",

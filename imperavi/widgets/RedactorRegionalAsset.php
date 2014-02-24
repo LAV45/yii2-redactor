@@ -5,23 +5,23 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\widgets;
+namespace app\modules\redactor\widgets;
 use Yii;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorPluginFontsizeAsset extends \yii\web\AssetBundle
+class RedactorRegionalAsset extends \yii\web\AssetBundle
 {
-    public $depends = array('yii\redactor\widgets\RedactorAsset');
+    public $depends = array('app\modules\redactor\widgets\RedactorAsset');
     public $js = array(
-        'plugins/fontsize/fontsize.js',
+        'lang/redactor-i18n.js',
     );
 
     public function init()
     {
-        $this->sourcePath = Yii::getAlias('@yii/redactor/assets');
+        $this->sourcePath = __DIR__.'/../assets';
     }
 
 }

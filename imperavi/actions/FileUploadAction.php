@@ -5,8 +5,8 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\actions;
-use yii\redactor\models\FileUploadModel;
+namespace app\modules\redactor\actions;
+use app\modules\redactor\models\FileUploadModel;
 use yii\helpers\Json;
 
 /**

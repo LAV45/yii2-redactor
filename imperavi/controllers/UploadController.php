@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\controllers;
+namespace app\modules\redactor\controllers;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
@@ -18,16 +18,16 @@ class UploadController extends \yii\web\Controller
     {
         return array(
             'file' => array(
-                'class' => \yii\redactor\actions\FileUploadAction::className()
+                'class' => \app\modules\redactor\actions\FileUploadAction::className()
             ),
             'image' => array(
-                'class' => \yii\redactor\actions\ImageUploadAction::className()
+                'class' => \app\modules\redactor\actions\ImageUploadAction::className()
             ),
             'imagejson' => array(
-                'class' => \yii\redactor\actions\ImageGetJsonAction::className()
+                'class' => \app\modules\redactor\actions\ImageGetJsonAction::className()
             ),
             'clipboard' => array(
-                'class' => \yii\redactor\actions\ClipboardUploadAction::className()
+                'class' => \app\modules\redactor\actions\ClipboardUploadAction::className()
             )
         );
     }

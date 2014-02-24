@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\widgets;
+namespace app\modules\redactor\widgets;
 use Yii;
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
@@ -18,13 +18,8 @@ use yii\web\JsExpression;
  */
 class Redactor extends InputWidget
 {
-    public $options = array();
-    public $clientOptions = array(
-        'imageGetJson' => '/redactor/upload/imagejson',
-        'imageUpload' => '/redactor/upload/image',
-        'clipboardUploadUrl' => '/redactor/upload/clipboard',
-        'fileUpload' => '/redactor/upload/file'
-    );
+    public $options = [];
+    public $clientOptions = [];
 
     public function init()
     {
@@ -33,13 +28,20 @@ class Redactor extends InputWidget
         } else {
             $this->options['id'] = $this->getId();
         }
-        if ($this->clientOptions['imageUpload']) {
+		$this->clientOptions['imageGetJson'] = Yii::getAlias('@web').'/redactor/upload/imagejson';
+		$this->clientOptions['imageUpload'] = Yii::getAlias('@web').'/redactor/upload/image';
+		$this->clientOptions['clipboardUploadUrl'] = Yii::getAlias('@web').'/redactor/upload/clipboard';
+		$this->clientOptions['fileUpload'] = Yii::getAlias('@web').'/redactor/upload/file';
+
+	    if ($this->clientOptions['imageUpload']) {
             $this->clientOptions['imageUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
         }
-        if ($this->clientOptions['fileUpload']) {
+
+	    if ($this->clientOptions['fileUpload']) {
             $this->clientOptions['fileUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
         }
-        $this->registerBundles();
+
+	    $this->registerBundles();
         $this->registerScript();
     }
 
@@ -56,12 +58,13 @@ class Redactor extends InputWidget
     {
         RedactorAsset::register($this->getView());
         if (!isset($this->clientOptions['lang']) && Yii::$app->language != 'en_US') {
-            $this->clientOptions['lang'] = Yii::$app->language;
+
+	        $this->clientOptions['lang'] = strtolower(substr(Yii::$app->language , 0, 2));
             RedactorRegionalAsset::register($this->getView());
         }
         if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {
             foreach ($this->clientOptions['plugins'] as $plugin) {
-                $assetBundle = 'yii\redactor\RedactorPlugin' . ucfirst($plugin) . 'Asset';
+                $assetBundle = 'app\modules\redactor\RedactorPlugin' . ucfirst($plugin) . 'Asset';
                 if (class_exists($assetBundle)) {
                     $assetBundle::register($this->getView());
                 }

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\models;
+namespace app\modules\redactor\models;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
@@ -24,10 +24,10 @@ class FileUploadModel extends \yii\base\Model
 
     public function rules()
     {
-        return array(
-            array('uploadDir', 'required'),
-            array('file', 'file')
-        );
+        return [
+            ['uploadDir', 'required'],
+            ['file', 'file']
+        ];
     }
 
     public function upload()
@@ -56,18 +56,18 @@ class FileUploadModel extends \yii\base\Model
 
     public function getUrl()
     {
-        return str_replace(DIRECTORY_SEPARATOR, '/', str_replace(Yii::getAlias('@webroot'), '', $this->getPath()));
+        return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
 
     protected function getExtensionName()
     {
         if (strstr($this->file, '.')) {
-            return preg_replace('/^.*?\./', '.', strtolower($this->file));
+            return preg_replace('/^.*?\./', '', strtolower($this->file));
         }
         return '';
     }
 
-    protected function normalizeFilename()
+	protected function normalizeFilename()
     {
         if (!$this->_filename) {
             $extensionName = $this->getExtensionName();

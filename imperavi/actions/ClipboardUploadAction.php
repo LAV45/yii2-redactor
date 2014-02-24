@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\actions;
+namespace app\modules\redactor\actions;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
@@ -67,7 +67,7 @@ class ClipboardUploadAction extends \yii\base\Action
 
     protected function getUrl()
     {
-        return str_replace(DIRECTORY_SEPARATOR, '/', str_replace(Yii::getAlias('@webroot'), '', $this->getPath()));
+        return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
 
 }

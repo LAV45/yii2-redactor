@@ -5,8 +5,8 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\actions;
-use yii\redactor\models\ImageUploadModel;
+namespace app\modules\redactor\actions;
+use app\modules\redactor\models\ImageUploadModel;
 use yii\helpers\Json;
 
 /**
@@ -20,7 +20,7 @@ class ImageUploadAction extends \yii\base\Action
     function run()
     {
         if (isset($_FILES)) {
-            $model = new ImageUploadModel(array('uploadDir' => $this->uploadDir));
+            $model = new ImageUploadModel(['uploadDir' => $this->uploadDir]);
             if ($model->upload()) {
                 echo $model->toJson();
             } else {

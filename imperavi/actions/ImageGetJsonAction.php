@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\actions;
+namespace app\modules\redactor\actions;
 use Yii;
 use yii\web\HttpException;
 use yii\helpers\FileHelper;
@@ -28,14 +28,15 @@ class ImageGetJsonAction extends \yii\base\Action
 
     public function run()
     {
-        $files = FileHelper::findFiles($this->getPath(), array('recursive' => true, 'only' => array('.jpg', '.jpeg', '.jpe', '.png', '.gif')));
-        if (is_array($files) && count($files)) {
-            $result = array();
+        $files = FileHelper::findFiles($this->getPath(), ['recursive' => true, 'only' => ['*.jpg', '*.jpeg', '*.jpe', '*.png', '*.gif']]);
+
+	    if (is_array($files) && count($files)) {
+            $result = [];
             foreach ($files as $file) {
                 $url = $this->getUrl($file);
-                $result[] = array('thumb' => $url, 'image' => $url);
+                $result[] = ['thumb' => $url, 'image' => $url];
             }
-            echo Json::encode($result);
+           echo Json::encode($result);
         }
     }
 
@@ -50,7 +51,7 @@ class ImageGetJsonAction extends \yii\base\Action
 
     public function getUrl($path)
     {
-        return str_replace(DIRECTORY_SEPARATOR, '/', str_replace(Yii::getAlias('@webroot'), '', $path));
+	    return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $path);
     }
 
 }

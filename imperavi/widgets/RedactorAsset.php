@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\redactor\widgets;
+namespace app\modules\redactor\widgets;
 use Yii;
 
 /**
@@ -18,7 +18,7 @@ class RedactorAsset extends \yii\web\AssetBundle
 
     public function init()
     {
-        $this->sourcePath = Yii::getAlias('@yii/redactor/assets');
+        $this->sourcePath = __DIR__.'/../assets';
         if (YII_DEBUG) {
             $this->js[] = 'redactor.js';
             $this->css[] = 'redactor.css';
