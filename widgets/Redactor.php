@@ -31,7 +31,7 @@ class Redactor extends InputWidget
 
 
 	/**
-	 * inherit doc
+	 * Init default options and register JS
 	 */
 	public function init()
     {
@@ -61,7 +61,7 @@ class Redactor extends InputWidget
     }
 
 	/**
-	 *  Renders the widget.
+	 *  Renders the widget
 	 */
 	public function run()
     {
@@ -79,8 +79,10 @@ class Redactor extends InputWidget
 	public function registerBundles()
     {
         RedactorAsset::register($this->getView());
-        if (!isset($this->clientOptions['lang']) && strtolower(substr(Yii::$app->language , 0, 2)) != 'en') {
 
+		// Register global language (Yii::$app->language) file
+		// insert variable 'language' => 'ru-RU' into config file to change redactor language
+		if (strtolower(substr(Yii::$app->language , 0, 2)) != 'en') {
 	        $this->clientOptions['lang'] = strtolower(substr(Yii::$app->language , 0, 2));
             RedactorRegionalAsset::register($this->getView());
         }
