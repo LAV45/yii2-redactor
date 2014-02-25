@@ -64,7 +64,7 @@ class Redactor extends InputWidget
         }
         if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {
             foreach ($this->clientOptions['plugins'] as $plugin) {
-                $assetBundle = 'app\modules\redactor\RedactorPlugin' . ucfirst($plugin) . 'Asset';
+                $assetBundle = 'sim2github\imperavi\RedactorPlugin' . ucfirst($plugin) . 'Asset';
                 if (class_exists($assetBundle)) {
                     $assetBundle::register($this->getView());
                 }

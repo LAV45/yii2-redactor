@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\actions;
+namespace sim2github\imperavi\actions;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\models;
+namespace sim2github\imperavi\models;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\widgets;
+namespace sim2github\imperavi\widgets;
 use Yii;
 
 /**
@@ -14,7 +14,7 @@ use Yii;
  */
 class RedactorPluginsFullscreenAsset extends \yii\web\AssetBundle
 {
-    public $depends = array('app\modules\redactor\widgets\RedactorAsset');
+    public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
     public $js = array(
         'plugins/fullscreen/fullscreen.js',
     );

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\controllers;
+namespace sim2github\imperavi\controllers;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
@@ -18,16 +18,16 @@ class UploadController extends \yii\web\Controller
     {
         return array(
             'file' => array(
-                'class' => \app\modules\redactor\actions\FileUploadAction::className()
+                'class' => \sim2github\imperavi\actions\FileUploadAction::className()
             ),
             'image' => array(
-                'class' => \app\modules\redactor\actions\ImageUploadAction::className()
+                'class' => \sim2github\imperavi\actions\ImageUploadAction::className()
             ),
             'imagejson' => array(
-                'class' => \app\modules\redactor\actions\ImageGetJsonAction::className()
+                'class' => \sim2github\imperavi\actions\ImageGetJsonAction::className()
             ),
             'clipboard' => array(
-                'class' => \app\modules\redactor\actions\ClipboardUploadAction::className()
+                'class' => \sim2github\imperavi\actions\ClipboardUploadAction::className()
             )
         );
     }

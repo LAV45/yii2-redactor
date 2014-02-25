@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\models;
+namespace sim2github\imperavi\models;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;

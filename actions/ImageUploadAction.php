@@ -5,8 +5,8 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\actions;
-use app\modules\redactor\models\ImageUploadModel;
+namespace sim2github\imperavi\actions;
+use sim2github\imperavi\models\ImageUploadModel;
 use yii\helpers\Json;
 
 /**
