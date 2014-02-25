@@ -22,7 +22,7 @@ to the require section of your `composer.json` file.
 To use image and files manipulation
 ```php
 'modules' => [
-    	'redactor' =>  'sim2github\imperavi\Module',
+        'redactor' =>  'sim2github\imperavi\Module',
 ],
 ```
 ActiveForm usage:
@@ -41,6 +41,6 @@ TODO:
 =====
 - DOC
 - Usage
-~~~- Separated Language files~~~
+- ~~~ Separated Language files~~~
 - Change image and file name generation (md5 to index or smth)
 
