@@ -6,13 +6,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-```sh
+```
 php composer.phar require sim2github\imperavi "*"
 ```
 
 or add
 
-```php
+```
 "sim2github\imperavi": "*"
 ```
 
