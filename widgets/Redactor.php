@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\modules\redactor\widgets;
+namespace sim2github\imperavi\widgets;
 use Yii;
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
