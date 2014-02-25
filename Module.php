@@ -1,6 +1,6 @@
 <?php
 
-namespace sim2github\yii2-redactor\imperavi;
+namespace sim2github\imperavi;
 
 
 class Module extends \yii\base\Module
