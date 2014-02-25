@@ -18,17 +18,32 @@ use yii\web\JsExpression;
  */
 class Redactor extends InputWidget
 {
-    public $options = [];
-    public $clientOptions = [];
+	/**
+	 * @var array $options the options of JQuery (example: options['id'] )
+	 */
+	public $options = [];
 
-    public function init()
+	/**
+	 * @var array $clientOptions the options for the Imperavi Redactor.
+	 * Please refer to the corresponding [Imperavi Web page](http://imperavi.com/redactor/docs/)  for possible options.
+	 */
+	public $clientOptions = [];
+
+
+	/**
+	 * inherit doc
+	 */
+	public function init()
     {
+	    parent::init();
+
         if ($this->hasModel()) {
             $this->options['id'] = Html::getInputId($this->model, $this->attribute);
         } else {
             $this->options['id'] = $this->getId();
         }
-		$this->clientOptions['imageGetJson'] = Yii::getAlias('@web').'/redactor/upload/imagejson';
+
+	    $this->clientOptions['imageGetJson'] = Yii::getAlias('@web').'/redactor/upload/imagejson';
 		$this->clientOptions['imageUpload'] = Yii::getAlias('@web').'/redactor/upload/image';
 		$this->clientOptions['clipboardUploadUrl'] = Yii::getAlias('@web').'/redactor/upload/clipboard';
 		$this->clientOptions['fileUpload'] = Yii::getAlias('@web').'/redactor/upload/file';
@@ -45,7 +60,10 @@ class Redactor extends InputWidget
         $this->registerScript();
     }
 
-    public function run()
+	/**
+	 *  Renders the widget.
+	 */
+	public function run()
     {
         if ($this->hasModel()) {
             echo Html::activeTextarea($this->model, $this->attribute, $this->options);
@@ -54,10 +72,14 @@ class Redactor extends InputWidget
         }
     }
 
-    public function registerBundles()
+
+	/**
+	 * Register additional JS for Imperavei Redactor
+	 */
+	public function registerBundles()
     {
         RedactorAsset::register($this->getView());
-        if (!isset($this->clientOptions['lang']) && Yii::$app->language != 'en_US') {
+        if (!isset($this->clientOptions['lang']) && strtolower(substr(Yii::$app->language , 0, 2)) != 'en') {
 
 	        $this->clientOptions['lang'] = strtolower(substr(Yii::$app->language , 0, 2));
             RedactorRegionalAsset::register($this->getView());
@@ -72,7 +94,11 @@ class Redactor extends InputWidget
         }
     }
 
-    public function registerScript()
+
+	/**
+	 * Register redactor JS init
+	 */
+	public function registerScript()
     {
         $clientOptions = (count($this->clientOptions)) ? Json::encode($this->clientOptions) : '';
         $this->getView()->registerJs("jQuery('#{$this->options['id']}').redactor({$clientOptions});");

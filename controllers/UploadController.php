@@ -11,10 +11,14 @@ namespace sim2github\imperavi\controllers;
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
+
 class UploadController extends \yii\web\Controller
 {
 
-    public function actions()
+	/**
+	 * @return array
+	 */
+	public function actions()
     {
         return array(
             'file' => array(

@@ -17,16 +17,23 @@ use yii\helpers\Json;
  */
 class ImageGetJsonAction extends \yii\base\Action
 {
-    public $sourcePath = '@webroot/uploads';
+	/**
+	 * @var string
+	 */
+	public $sourcePath = '@webroot/uploads';
 
-    public function init()
+	/**
+	 * @throws \yii\web\HttpException
+	 */
+	public function init()
     {
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
     }
 
-    public function run()
+
+	public function run()
     {
         $files = FileHelper::findFiles($this->getPath(), ['recursive' => true, 'only' => ['*.jpg', '*.jpeg', '*.jpe', '*.png', '*.gif']]);
 
@@ -40,7 +47,10 @@ class ImageGetJsonAction extends \yii\base\Action
         }
     }
 
-    protected function getPath()
+	/**
+	 * @return string
+	 */
+	protected function getPath()
     {
         if (Yii::$app->user->isGuest) {
             return Yii::getAlias($this->sourcePath) . DIRECTORY_SEPARATOR . 'guest';
@@ -49,7 +59,11 @@ class ImageGetJsonAction extends \yii\base\Action
         }
     }
 
-    public function getUrl($path)
+	/**
+	 * @param $path
+	 * @return string
+	 */
+	public function getUrl($path)
     {
 	    return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $path);
     }

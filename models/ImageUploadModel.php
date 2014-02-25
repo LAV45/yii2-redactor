@@ -8,13 +8,18 @@
 namespace sim2github\imperavi\models;
 
 /**
+ * Class ImageUploadModel
+ * @package sim2github\imperavi\models
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
 class ImageUploadModel extends FileUploadModel
 {
 
-    public function rules()
+	/**
+	 * @return array
+	 */
+	public function rules()
     {
         return [
             ['uploadDir', 'required'],

@@ -15,13 +15,16 @@ use Yii;
 class RedactorRegionalAsset extends \yii\web\AssetBundle
 {
     public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
-    public $js = array(
-        'lang/redactor-i18n.js',
-    );
+
 
     public function init()
     {
         $this->sourcePath = __DIR__.'/../assets';
+
+	    $appLanguage = strtolower(substr(Yii::$app->language , 0, 2)); //First 2 letters
+
+	    if($appLanguage != 'en')
+		    $this->js[] = 'lang/' . $appLanguage . '.js';
     }
 
 }

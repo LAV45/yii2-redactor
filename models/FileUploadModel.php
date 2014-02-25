@@ -18,11 +18,23 @@ use yii\helpers\Json;
  */
 class FileUploadModel extends \yii\base\Model
 {
-    public $file;
-    public $uploadDir;
-    private $_filename;
+	/**
+	 * @var string
+	 */
+	public $file;
+	/**
+	 * @var string
+	 */
+	public $uploadDir;
+	/**
+	 * @var string
+	 */
+	private $_filename;
 
-    public function rules()
+	/**
+	 * @return array
+	 */
+	public function rules()
     {
         return [
             ['uploadDir', 'required'],
@@ -30,7 +42,10 @@ class FileUploadModel extends \yii\base\Model
         ];
     }
 
-    public function upload()
+	/**
+	 * @return bool
+	 */
+	public function upload()
     {
         if ($this->validate()) {
             return $this->file->saveAs($this->getPath(), true);
@@ -38,12 +53,18 @@ class FileUploadModel extends \yii\base\Model
         return false;
     }
 
-    public function toJson()
+	/**
+	 * @return JSON
+	 */
+	public function toJson()
     {
         return Json::encode(array('filelink' => $this->getUrl(), 'filename' => $this->normalizeFilename()));
     }
 
-    public function getPath()
+	/**
+	 * @return string
+	 */
+	public function getPath()
     {
         if (Yii::$app->user->isGuest) {
             $path = Yii::getAlias($this->uploadDir) . DIRECTORY_SEPARATOR . 'guest';
@@ -54,12 +75,18 @@ class FileUploadModel extends \yii\base\Model
         return $path . DIRECTORY_SEPARATOR . $this->normalizeFilename();
     }
 
-    public function getUrl()
+	/**
+	 * @return string
+	 */
+	public function getUrl()
     {
         return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
 
-    protected function getExtensionName()
+	/**
+	 * @return string
+	 */
+	protected function getExtensionName()
     {
         if (strstr($this->file, '.')) {
             return preg_replace('/^.*?\./', '', strtolower($this->file));
@@ -67,6 +94,9 @@ class FileUploadModel extends \yii\base\Model
         return '';
     }
 
+	/**
+	 * @return string
+	 */
 	protected function normalizeFilename()
     {
         if (!$this->_filename) {
@@ -82,7 +112,10 @@ class FileUploadModel extends \yii\base\Model
         return $this->_filename;
     }
 
-    public function beforeValidate()
+	/**
+	 * @return bool
+	 */
+	public function beforeValidate()
     {
         if (parent::beforeValidate()) {
             $this->file = UploadedFile::getInstanceByName('file');

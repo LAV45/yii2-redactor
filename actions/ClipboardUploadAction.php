@@ -17,12 +17,27 @@ use yii\web\HttpException;
  */
 class ClipboardUploadAction extends \yii\base\Action
 {
-    public $uploadDir = '@webroot/uploads';
-    private $_contentType;
-    private $_data;
-    private $_filename;
+	/**
+	 * @var string
+	 */
+	public $uploadDir = '@webroot/uploads';
+	/**
+	 * @var string
+	 */
+	private $_contentType;
+	/**
+	 * @var string
+	 */
+	private $_data;
+	/**
+	 * @var string
+	 */
+	private $_filename;
 
-    public function init()
+	/**
+	 * @throws \yii\web\HttpException
+	 */
+	public function init()
     {
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
@@ -31,7 +46,10 @@ class ClipboardUploadAction extends \yii\base\Action
         $this->_data = Yii::$app->request->getPost('data');
     }
 
-    public function run()
+	/**
+	 *
+	 */
+	public function run()
     {
         if ($this->_contentType && $this->_data) {
             if (file_put_contents($this->getPath(), base64_decode($this->_data))) {
@@ -40,13 +58,19 @@ class ClipboardUploadAction extends \yii\base\Action
         }
     }
 
-    protected function getExtensionName()
+	/**
+	 * @return mixed|string
+	 */
+	protected function getExtensionName()
     {
         $mimeTypes = require (Yii::getAlias('@yii/helpers/mimeTypes.php'));
         return (array_search($this->_contentType, $mimeTypes) !== false) ? array_search($this->_contentType, $mimeTypes) : 'png';
     }
 
-    protected function getFilename()
+	/**
+	 * @return string generate unique file name
+	 */
+	protected function getFilename()
     {
         if (!$this->_filename) {
             $this->_filename = substr(uniqid(md5(rand()), true), 0, 10) . '.' . $this->getExtensionName();
@@ -54,7 +78,10 @@ class ClipboardUploadAction extends \yii\base\Action
         return $this->_filename;
     }
 
-    protected function getPath()
+	/**
+	 * @return string
+	 */
+	protected function getPath()
     {
         if (Yii::$app->user->isGuest) {
             $path = Yii::getAlias($this->uploadDir) . DIRECTORY_SEPARATOR . 'guest';
@@ -65,7 +92,10 @@ class ClipboardUploadAction extends \yii\base\Action
         return $path . DIRECTORY_SEPARATOR . $this->getFilename();
     }
 
-    protected function getUrl()
+	/**
+	 * @return string
+	 */
+	protected function getUrl()
     {
         return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
