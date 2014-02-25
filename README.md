@@ -7,13 +7,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require sim2github\imperavi "*"
+php composer.phar require sim2github/yii2-imperavi "*"
 ```
 
 or add
 
 ```
-"sim2github\imperavi": "*"
+"sim2github/yii2-imperavi": "*"
 ```
 
 to the require section of your `composer.json` file.
