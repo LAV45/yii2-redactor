@@ -43,10 +43,10 @@ class Redactor extends InputWidget
             $this->options['id'] = $this->getId();
         }
 
-	    $this->clientOptions['imageGetJson'] = Yii::getAlias('@web').'/redactor/upload/imagejson';
-		$this->clientOptions['imageUpload'] = Yii::getAlias('@web').'/redactor/upload/image';
-		$this->clientOptions['clipboardUploadUrl'] = Yii::getAlias('@web').'/redactor/upload/clipboard';
-		$this->clientOptions['fileUpload'] = Yii::getAlias('@web').'/redactor/upload/file';
+	    $this->clientOptions['imageGetJson'] = isset($this->clientOptions['imageGetJson']) ? $this->clientOptions['imageGetJson'] : Yii::getAlias('@web').'/redactor/upload/imagejson';
+	    $this->clientOptions['imageUpload'] = isset($this->clientOptions['imageUpload']) ? $this->clientOptions['imageUpload'] : Yii::getAlias('@web').'/redactor/upload/image';
+	    $this->clientOptions['clipboardUploadUrl'] = isset($this->clientOptions['clipboardUploadUrl']) ? $this->clientOptions['clipboardUploadUrl']: Yii::getAlias('@web').'/redactor/upload/clipboard';
+	    $this->clientOptions['fileUpload'] = isset($this->clientOptions['fileUpload']) ? $this->clientOptions['fileUpload']: Yii::getAlias('@web').'/redactor/upload/file';
 
 	    if ($this->clientOptions['imageUpload']) {
             $this->clientOptions['imageUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
@@ -80,10 +80,8 @@ class Redactor extends InputWidget
     {
         RedactorAsset::register($this->getView());
 
-		// Register global language (Yii::$app->language) file
-		// insert variable 'language' => 'ru-RU' into config file to change redactor language
-		if (strtolower(substr(Yii::$app->language , 0, 2)) != 'en') {
-	        $this->clientOptions['lang'] = strtolower(substr(Yii::$app->language , 0, 2));
+		if (Yii::$app->language != 'en') {
+	        $this->clientOptions['lang'] = Yii::$app->language;
             RedactorRegionalAsset::register($this->getView());
         }
         if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {

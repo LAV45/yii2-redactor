@@ -21,10 +21,8 @@ class RedactorRegionalAsset extends \yii\web\AssetBundle
     {
         $this->sourcePath = __DIR__.'/../assets';
 
-	    $appLanguage = strtolower(substr(Yii::$app->language , 0, 2)); //First 2 letters
-
-	    if($appLanguage != 'en')
-		    $this->js[] = 'lang/' . $appLanguage . '.js';
+	    if(Yii::$app->language != 'en')
+		    $this->js[] = 'lang/' . Yii::$app->language  . '.js';
     }
 
 }
