@@ -1,5 +1,5 @@
 {
-    "name": "sim2github/yii2-imperavi",
+    "name": "sim2github/yii2-imperavi-module",
     "description": "Redactor module for Yii2 Framework.",
     "keywords": ["yii2", "extension", "redactor", "WYSIWYG", "html editor", "imperavi"],
     "type": "yii2-extension",
