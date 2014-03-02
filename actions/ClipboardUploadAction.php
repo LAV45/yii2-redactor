@@ -42,8 +42,9 @@ class ClipboardUploadAction extends \yii\base\Action
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
-        $this->_contentType = Yii::$app->request->getPost('contentType');
-        $this->_data = Yii::$app->request->getPost('data');
+        $this->_contentType = Yii::$app->request->post('contentType');
+        $this->_data = Yii::$app->request->post('data');
+
     }
 
 	/**
@@ -51,9 +52,9 @@ class ClipboardUploadAction extends \yii\base\Action
 	 */
 	public function run()
     {
-        if ($this->_contentType && $this->_data) {
+	    if ($this->_contentType && $this->_data) {
             if (file_put_contents($this->getPath(), base64_decode($this->_data))) {
-                echo Json::encode(array('filelink' => $this->getUrl(), 'filename' => $this->getFilename()));
+                echo Json::encode(['filelink' => $this->getUrl(), 'filename' => $this->getFilename()]);
             }
         }
     }

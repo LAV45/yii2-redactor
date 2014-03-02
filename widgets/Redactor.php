@@ -43,6 +43,7 @@ class Redactor extends InputWidget
             $this->options['id'] = $this->getId();
         }
 
+	    $this->clientOptions['lang'] = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
 	    $this->clientOptions['imageGetJson'] = isset($this->clientOptions['imageGetJson']) ? $this->clientOptions['imageGetJson'] : Yii::getAlias('@web').'/redactor/upload/imagejson';
 	    $this->clientOptions['imageUpload'] = isset($this->clientOptions['imageUpload']) ? $this->clientOptions['imageUpload'] : Yii::getAlias('@web').'/redactor/upload/image';
 	    $this->clientOptions['clipboardUploadUrl'] = isset($this->clientOptions['clipboardUploadUrl']) ? $this->clientOptions['clipboardUploadUrl']: Yii::getAlias('@web').'/redactor/upload/clipboard';
@@ -80,14 +81,14 @@ class Redactor extends InputWidget
     {
         RedactorAsset::register($this->getView());
 
-		if (Yii::$app->language != 'en') {
-	        $this->clientOptions['lang'] = Yii::$app->language;
-            RedactorRegionalAsset::register($this->getView());
-        }
+		if ($this->clientOptions['lang'] != 'en'){
+			RedactorRegionalAsset::register($this->getView())->js[] = 'lang/' . $this->clientOptions['lang']  . '.js';
+		}
+
         if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {
             foreach ($this->clientOptions['plugins'] as $plugin) {
-                $assetBundle = 'sim2github\imperavi\RedactorPlugin' . ucfirst($plugin) . 'Asset';
-                if (class_exists($assetBundle)) {
+                $assetBundle = 'sim2github\imperavi\widgets\RedactorPlugin' . ucfirst($plugin) . 'Asset';
+	            if (class_exists($assetBundle)) {
                     $assetBundle::register($this->getView());
                 }
             }

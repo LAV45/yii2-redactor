@@ -6,7 +6,6 @@
  */
 
 namespace sim2github\imperavi\widgets;
-use Yii;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
@@ -20,9 +19,6 @@ class RedactorRegionalAsset extends \yii\web\AssetBundle
     public function init()
     {
         $this->sourcePath = __DIR__.'/../assets';
-
-	    if(Yii::$app->language != 'en')
-		    $this->js[] = 'lang/' . Yii::$app->language  . '.js';
     }
 
 }

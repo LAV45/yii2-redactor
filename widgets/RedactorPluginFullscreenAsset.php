@@ -12,7 +12,7 @@ use Yii;
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorPluginsFullscreenAsset extends \yii\web\AssetBundle
+class RedactorPluginFullscreenAsset extends \yii\web\AssetBundle
 {
     public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
     public $js = array(
