@@ -11,12 +11,13 @@ use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
+use \yii\base\Model;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class FileUploadModel extends \yii\base\Model
+class FileUploadModel extends Model
 {
 	/**
 	 * @var string
@@ -58,7 +59,7 @@ class FileUploadModel extends \yii\base\Model
 	 */
 	public function toJson()
     {
-        return Json::encode(array('filelink' => $this->getUrl(), 'filename' => $this->normalizeFilename()));
+        return Json::encode(['filelink' => $this->getUrl(), 'filename' => $this->normalizeFilename()]);
     }
 
 	/**

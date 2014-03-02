@@ -7,6 +7,7 @@
 
 namespace sim2github\imperavi\actions;
 use Yii;
+use \yii\base\Action;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\HttpException;
@@ -15,7 +16,7 @@ use yii\web\HttpException;
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class ClipboardUploadAction extends \yii\base\Action
+class ClipboardUploadAction extends Action
 {
 	/**
 	 * @var string

@@ -7,13 +7,14 @@
 
 namespace sim2github\imperavi\widgets;
 
+use \yii\web\AssetBundle;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorRegionalAsset extends \yii\web\AssetBundle
+class RedactorRegionalAsset extends AssetBundle
 {
-    public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
+    public $depends = ['sim2github\imperavi\widgets\RedactorAsset'];
 
 
     public function init()

@@ -7,12 +7,17 @@
 
 namespace sim2github\imperavi\controllers;
 
+use \yii\web\Controller;
+use \sim2github\imperavi\actions\FileUploadAction;
+use \sim2github\imperavi\actions\ImageUploadAction;
+use \sim2github\imperavi\actions\ImageGetJsonAction;
+use \sim2github\imperavi\actions\ClipboardUploadAction;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
 
-class UploadController extends \yii\web\Controller
+class UploadController extends Controller
 {
 
 	/**
@@ -20,20 +25,20 @@ class UploadController extends \yii\web\Controller
 	 */
 	public function actions()
     {
-        return array(
-            'file' => array(
-                'class' => \sim2github\imperavi\actions\FileUploadAction::className()
-            ),
-            'image' => array(
-                'class' => \sim2github\imperavi\actions\ImageUploadAction::className()
-            ),
-            'imagejson' => array(
-                'class' => \sim2github\imperavi\actions\ImageGetJsonAction::className()
-            ),
-            'clipboard' => array(
-                'class' => \sim2github\imperavi\actions\ClipboardUploadAction::className()
-            )
-        );
+        return [
+            'file' => [
+                'class' => FileUploadAction::className()
+            ],
+            'image' => [
+                'class' => ImageUploadAction::className()
+            ],
+            'imagejson' => [
+                'class' => ImageGetJsonAction::className()
+            ],
+            'clipboard' => [
+                'class' => ClipboardUploadAction::className()
+            ]
+        ];
     }
 
 }

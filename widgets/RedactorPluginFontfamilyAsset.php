@@ -7,17 +7,18 @@
 
 namespace sim2github\imperavi\widgets;
 use Yii;
+use \yii\web\AssetBundle;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorPluginFontfamilyAsset extends \yii\web\AssetBundle
+class RedactorPluginFontfamilyAsset extends AssetBundle
 {
-    public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
-    public $js = array(
+    public $depends = ['sim2github\imperavi\widgets\RedactorAsset'];
+    public $js = [
         'plugins/fontfamily/fontfamily.js',
-    );
+    ];
 
     public function init()
     {

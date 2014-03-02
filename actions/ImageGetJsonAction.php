@@ -10,12 +10,13 @@ use Yii;
 use yii\web\HttpException;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
+use \yii\base\Action;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class ImageGetJsonAction extends \yii\base\Action
+class ImageGetJsonAction extends Action
 {
 	/**
 	 * @var string

@@ -7,14 +7,14 @@
 
 namespace sim2github\imperavi\widgets;
 use Yii;
-
+use \yii\web\AssetBundle;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorAsset extends \yii\web\AssetBundle
+class RedactorAsset extends AssetBundle
 {
-    public $depends = array('yii\web\JqueryAsset');
+    public $depends = ['yii\web\JqueryAsset'];
 
     public function init()
     {

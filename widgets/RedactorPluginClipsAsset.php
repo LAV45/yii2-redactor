@@ -7,20 +7,21 @@
 
 namespace sim2github\imperavi\widgets;
 use Yii;
+use \yii\web\AssetBundle;
 
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorPluginClipsAsset extends \yii\web\AssetBundle
+class RedactorPluginClipsAsset extends AssetBundle
 {
-    public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
-    public $js = array(
+    public $depends = ['sim2github\imperavi\widgets\RedactorAsset'];
+    public $js = [
         'plugins/clips/clips.js',
-    );
-    public $css = array(
+    ];
+    public $css = [
         'plugins/clips/clips.css'
-    );
+    ];
 
     public function init()
     {

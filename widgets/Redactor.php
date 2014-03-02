@@ -89,7 +89,7 @@ class Redactor extends InputWidget
             foreach ($this->clientOptions['plugins'] as $plugin) {
                 $assetBundle = 'sim2github\imperavi\widgets\RedactorPlugin' . ucfirst($plugin) . 'Asset';
 	            if (class_exists($assetBundle)) {
-                    $assetBundle::register($this->getView());
+		            $assetBundle::register($this->getView());
                 }
             }
         }

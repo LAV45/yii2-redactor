@@ -7,17 +7,17 @@
 
 namespace sim2github\imperavi\widgets;
 use Yii;
-
+use \yii\web\AssetBundle;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class RedactorPluginFullscreenAsset extends \yii\web\AssetBundle
+class RedactorPluginFullscreenAsset extends AssetBundle
 {
-    public $depends = array('sim2github\imperavi\widgets\RedactorAsset');
-    public $js = array(
+    public $depends = ['sim2github\imperavi\widgets\RedactorAsset'];
+    public $js = [
         'plugins/fullscreen/fullscreen.js',
-    );
+    ];
 
     public function init()
     {

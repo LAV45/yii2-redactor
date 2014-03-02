@@ -8,12 +8,12 @@
 namespace sim2github\imperavi\actions;
 use sim2github\imperavi\models\ImageUploadModel;
 use yii\helpers\Json;
-
+use \yii\base\Action;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0
  */
-class ImageUploadAction extends \yii\base\Action
+class ImageUploadAction extends Action
 {
     public $uploadDir = '@webroot/uploads';
 
@@ -25,7 +25,7 @@ class ImageUploadAction extends \yii\base\Action
                 echo $model->toJson();
             } else {
                 if ($model->firstErrors) {
-                    echo Json::encode(array('error' => $model->firstErrors[0]));
+                    echo Json::encode(['error' => $model->firstErrors[0]]);
                 }
             }
         }
