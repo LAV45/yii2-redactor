@@ -57,6 +57,12 @@ class Redactor extends InputWidget
             $this->clientOptions['fileUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
         }
 
+	    //CallBacks to test
+	    if($this->options['debug']){
+		    $this->clientOptions['imageUploadCallback'] = new JsExpression("function(image, json) { console.log(json); }");
+	    }
+
+
 	    $this->registerBundles();
         $this->registerScript();
     }
