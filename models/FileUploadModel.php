@@ -89,8 +89,8 @@ class FileUploadModel extends Model
 	 */
 	protected function getExtensionName()
     {
-        if (strstr($this->file, '.')) {
-            return preg_replace('/^.*?\./', '', strtolower($this->file));
+        if (strrchr($this->file, '.')) {
+            return strtolower(strrchr($this->file, '.'));
         }
         return '';
     }
@@ -103,7 +103,7 @@ class FileUploadModel extends Model
         if (!$this->_filename) {
             $extensionName = $this->getExtensionName();
             if (!empty($extensionName)) {
-                $name = Inflector::slug(preg_replace('/\..*?$/', '', strtolower($this->file)));
+                $name = Inflector::slug(strtolower(substr($this->file, 0, strrpos($this->file, '.') + 1)));
                 $name .= $extensionName;
             } else {
                 $name = strtolower($this->file);
