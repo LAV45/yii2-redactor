@@ -27,10 +27,7 @@ class FileUploadModel extends Model
 	 * @var string
 	 */
 	public $uploadDir;
-	/**
-	 * @var string
-	 */
-	private $_filename;
+
 
 	/**
 	 * @return array
@@ -49,7 +46,7 @@ class FileUploadModel extends Model
 	public function upload()
     {
         if ($this->validate()) {
-            return $this->file->saveAs($this->getPath(), true);
+            return UploadedFile::getInstanceByName('file')->saveAs($this->getPath(), true);
         }
         return false;
     }
@@ -84,45 +81,13 @@ class FileUploadModel extends Model
         return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
 
-	/**
-	 * @return string
-	 */
-	protected function getExtensionName()
-    {
-        if (strrchr($this->file, '.')) {
-            return strtolower(strrchr($this->file, '.'));
-        }
-        return '';
-    }
 
 	/**
 	 * @return string
 	 */
 	protected function normalizeFilename()
     {
-        if (!$this->_filename) {
-            $extensionName = $this->getExtensionName();
-            if (!empty($extensionName)) {
-                $name = Inflector::slug(strtolower(substr($this->file, 0, strrpos($this->file, '.') + 1)));
-                $name .= $extensionName;
-            } else {
-                $name = strtolower($this->file);
-            }
-            $this->_filename = substr(uniqid(md5(rand()), true), 0, 10) . '.' . $name;
-        }
-        return $this->_filename;
+        return  Inflector::slug(UploadedFile::getInstanceByName('file')->getBaseName()) . '.'
+        . UploadedFile::getInstanceByName('file')->getExtension();
     }
-
-	/**
-	 * @return bool
-	 */
-	public function beforeValidate()
-    {
-        if (parent::beforeValidate()) {
-            $this->file = UploadedFile::getInstanceByName('file');
-            return true;
-        }
-        return false;
-    }
-
 }

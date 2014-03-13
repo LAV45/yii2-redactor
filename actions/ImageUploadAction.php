@@ -8,7 +8,7 @@
 namespace sim2github\imperavi\actions;
 use sim2github\imperavi\models\ImageUploadModel;
 use yii\helpers\Json;
-use \yii\base\Action;
+use yii\base\Action;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
  * @since 2.0

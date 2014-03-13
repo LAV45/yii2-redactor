@@ -28,20 +28,24 @@ To use image and files manipulation
 ActiveForm usage:
 --------------
 
-```
-		<?= $form->field($model, 'content')->widget(sim2github\imperavi\widgets\Redactor::className(), [
+```php
+		$form->field($model, 'content')->widget(sim2github\imperavi\widgets\Redactor::className(), [
+			'options' => [
+				'debug' => 'true',
+			],
 			'clientOptions' => [
-				'convertImageLinks' => 'true',
-				'convertVideoLinks' => 'true',
+				'convertImageLinks' => 'true', //By default
+				'convertVideoLinks' => 'true', //By default
 				//'wym' => 'true',
-				'linkEmail' => 'true',
+				//'air' => 'true',
+				'linkEmail' => 'true', //By default
 				'lang' => 'ru',
-				'imageGetJson' =>  \Yii::getAlias('@web').'/redactor/upload/imagejson',
-				'plugins' => ['clips', 'fullscreen'],
+				'imageGetJson' =>  \Yii::getAlias('@web').'/redactor/upload/imagejson', //By default
+				'plugins' => ['clips', 'fullscreen'], //By default
 			],
 
-		])  ?>
+		])
 ```
-Source
-------
+Asset Source
+------------
 https://github.com/yiiext/imperavi-redactor-widget
