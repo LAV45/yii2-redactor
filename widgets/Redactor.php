@@ -58,7 +58,7 @@ class Redactor extends InputWidget
         }
 
 	    //CallBacks to test
-	    if($this->options['debug']){
+	    if($this->options['debug'] = true){
 		    $this->clientOptions['imageUploadCallback'] = new JsExpression("function(image, json) { console.log(json); }");
 	    }
 
