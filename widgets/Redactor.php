@@ -43,7 +43,12 @@ class Redactor extends InputWidget
             $this->options['id'] = $this->getId();
         }
 
+	    //Defaults
 	    $this->clientOptions['lang'] = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
+	    $this->clientOptions['convertImageLinks'] = isset($this->clientOptions['convertImageLinks']) ? $this->clientOptions['convertImageLinks'] : true;
+	    $this->clientOptions['convertVideoLinks'] = isset($this->clientOptions['convertVideoLinks']) ? $this->clientOptions['convertVideoLinks'] : true;
+	    $this->clientOptions['linkEmail'] = isset($this->clientOptions['linkEmail']) ? $this->clientOptions['linkEmail'] : true;
+
 	    $this->clientOptions['imageGetJson'] = isset($this->clientOptions['imageGetJson']) ? $this->clientOptions['imageGetJson'] : Yii::getAlias('@web').'/redactor/upload/imagejson';
 	    $this->clientOptions['imageUpload'] = isset($this->clientOptions['imageUpload']) ? $this->clientOptions['imageUpload'] : Yii::getAlias('@web').'/redactor/upload/image';
 	    $this->clientOptions['clipboardUploadUrl'] = isset($this->clientOptions['clipboardUploadUrl']) ? $this->clientOptions['clipboardUploadUrl']: Yii::getAlias('@web').'/redactor/upload/clipboard';
