@@ -31,6 +31,9 @@ class ImageGetJsonAction extends Action
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
+	    if (parse_url(Yii::$app->request->referrer,PHP_URL_HOST) !== Yii::$app->request->serverName){
+			throw new HttpException(403, 'This action allow only from ' . Yii::$app->request->serverName . ' server');
+	    };
     }
 
 

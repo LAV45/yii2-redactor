@@ -43,6 +43,10 @@ class ClipboardUploadAction extends Action
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
+	    if (parse_url(Yii::$app->request->referrer,PHP_URL_HOST) !== Yii::$app->request->serverName){
+			throw new HttpException(403, 'This action allow only from ' . Yii::$app->request->serverName . 'server');
+	    };
+
         $this->_contentType = Yii::$app->request->post('contentType');
         $this->_data = Yii::$app->request->post('data');
 
@@ -75,7 +79,7 @@ class ClipboardUploadAction extends Action
 	protected function getFilename()
     {
         if (!$this->_filename) {
-            $this->_filename = substr(uniqid(md5(rand()), true), 0, 10) . '.' . $this->getExtensionName();
+            $this->_filename = time() . '-clipboard.' . $this->getExtensionName();
         }
         return $this->_filename;
     }
