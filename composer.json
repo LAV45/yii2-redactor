@@ -23,7 +23,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "sim2github\\imperavi\\": "/"
+            "sim2github\\imperavi\\": ""
         }
     },
     "minimum-stability": "dev",
