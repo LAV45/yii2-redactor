@@ -21,7 +21,7 @@ class RedactorPluginFullscreenAsset extends AssetBundle
 
     public function init()
     {
-        $this->sourcePath = __DIR__.'/../assets';
+	    $this->sourcePath = Yii::getAlias('@vendor/yiiext/imperavi-redactor-widget/assets');
     }
 
 }

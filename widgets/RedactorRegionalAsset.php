@@ -7,6 +7,7 @@
 
 namespace sim2github\imperavi\widgets;
 
+use Yii;
 use \yii\web\AssetBundle;
 /**
  * @author Nghia Nguyen <yiidevelop@hotmail.com>
@@ -19,7 +20,7 @@ class RedactorRegionalAsset extends AssetBundle
 
     public function init()
     {
-        $this->sourcePath = __DIR__.'/../assets';
+	    $this->sourcePath = Yii::getAlias('@vendor/yiiext/imperavi-redactor-widget/assets');
     }
 
 }

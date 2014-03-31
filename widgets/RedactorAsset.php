@@ -18,13 +18,12 @@ class RedactorAsset extends AssetBundle
 
     public function init()
     {
-        $this->sourcePath = __DIR__.'/../assets';
+	    $this->sourcePath = Yii::getAlias('@vendor/yiiext/imperavi-redactor-widget/assets');
+	    $this->css[] = 'redactor.css';
         if (YII_DEBUG) {
             $this->js[] = 'redactor.js';
-            $this->css[] = 'redactor.css';
         } else {
             $this->js[] = 'redactor.min.js';
-            $this->css[] = 'redactor.min.css';
         }
     }
 
