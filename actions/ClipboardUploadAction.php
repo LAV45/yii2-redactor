@@ -58,7 +58,7 @@ class ClipboardUploadAction extends Action
 	public function run()
     {
 	    if ($this->_contentType && $this->_data) {
-            if (file_put_contents($this->getPath(), base64_decode($this->_data))) {
+            if (file_put_contents($this->getPath(), base64_decode($this->_data))) { //TODO: Check diff of data from Chrome and FF
                 echo Json::encode(['filelink' => $this->getUrl(), 'filename' => $this->getFilename()]);
             }
         }
