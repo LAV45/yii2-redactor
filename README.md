@@ -18,8 +18,9 @@ or add
 
 to the require section of your `composer.json` file.
 
-#### Add module to your main.php
-To use image and files manipulation
+#### To use image and files manipulation
+Add redactor module to your config
+
 ```php
 'modules' => [
         'redactor' =>  'sim2github\imperavi\Module',
@@ -46,6 +47,10 @@ ActiveForm usage:
 
 		])
 ```
+
+You can extend `sim2github\imperavi\widgets\Redactor` and overwrite `init` function to define your own settings by default.
+
 Asset Source
 ------------
-https://github.com/yiiext/imperavi-redactor-widget
+Module use last version of redactor https://github.com/yiiext/imperavi-redactor-widget.
+Massive changes in [Yii2](https://github.com/yiisoft/yii2) and [Imperavi-redactor](http://imperavi.com/redactor/log/) can brake some functionality.
