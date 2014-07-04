@@ -67,7 +67,10 @@ class Redactor extends InputWidget
 		    $this->clientOptions['imageUploadCallback'] = new JsExpression("function(image, json) { console.log(json); }");
 	    }
 
-
+	    //csrf token
+	    $request = Yii::$app->getRequest();
+	    $this->clientOptions['uploadFields'] = [$request->csrfParam=>$request->getCsrfToken()];
+	    
 	    $this->registerBundles();
         $this->registerScript();
     }
