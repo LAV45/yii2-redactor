@@ -45,7 +45,7 @@ class FileUploadModel extends Model
 	 */
 	public function upload()
     {
-        if ($this->validate()) {
+        if ($this->validate() && !is_null(UploadedFile::getInstanceByName('file'))) {
             return UploadedFile::getInstanceByName('file')->saveAs($this->getPath(), true);
         }
         return false;
