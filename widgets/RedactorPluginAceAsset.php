@@ -13,19 +13,16 @@ use \yii\web\AssetBundle;
 
 class RedactorPluginAceAsset extends AssetBundle
 {
-    public $depends = ['sim2github\imperavi\widgets\RedactorAsset'];
-    public $js = [
-	    '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js',
-        '//nightwing.github.io/emmet-core/emmet.js',
-        '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ext-emmet.js',
-        'sim2github\imperavi\assets\plugins\ace\ace.js',
-    ];
-    public $css = [
-        'sim2github\imperavi\assets\plugins\ace\ace.css'
-    ];
+	public $depends = [
+		'sim2github\imperavi\widgets\RedactorAsset',
+		'sim2github\imperavi\widgets\RedactorPluginAceEmmetExtAsset',
+	];
+	public $js = ['plugins/ace/ace.js'];
+	public $css = ['plugins/ace/ace.css'];
 
-    public function init()
-    {
-    }
+	public function init()
+	{
+		$this->sourcePath = Yii::getAlias('@sim2github/imperavi/assets');
+	}
 
 }
