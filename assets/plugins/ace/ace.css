@@ -1,6 +1,6 @@
 .redactor_toolbar li a.re-ace {
-
+	/*background-image: url(ace-01.png);*/
 }
 .redactor_toolbar li a.re-ace:hover {
-
+	/*background-image: url(ace-hover-01.png);*/
 }
