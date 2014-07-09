@@ -34,7 +34,7 @@ ActiveForm usage:
 			'options' => [
 				'debug' => 'true',
 			],
-			'clientOptions' => [
+			'clientOptions' => [ // [More about settings](http://imperavi.com/redactor/docs/settings/)
 				'convertImageLinks' => 'true', //By default
 				'convertVideoLinks' => 'true', //By default
 				//'wym' => 'true',
@@ -42,13 +42,21 @@ ActiveForm usage:
 				'linkEmail' => 'true', //By default
 				'lang' => 'ru',
 				'imageGetJson' =>  \Yii::getAlias('@web').'/redactor/upload/imagejson', //By default
-				'plugins' => ['clips', 'fullscreen'], //By default
+				'plugins' => // [More about plugins](http://imperavi.com/redactor/plugins/)
+					'ace',
+					'clips', 
+					'fullscreen'
+				],
 			],
 
 		])
 ```
 
 You can extend `sim2github\imperavi\widgets\Redactor` and overwrite `init` function to define your own settings by default.
+
+Custom plugin
+------------
+* [Ace](http://ace.c9.io/#nav=about) Code editor like GitHub does. With [Emmet](http://docs.emmet.io/) extention.
 
 Asset Source
 ------------
