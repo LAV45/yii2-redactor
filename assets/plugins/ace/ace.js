@@ -19,7 +19,7 @@ RedactorPlugins.ace = {
 						$redactor.toggleCode(false);
 
 								$redactor.$source
-									.before('<div id="ace-editor" style="width:'+$redactor.$editor.outerWidth()+'px;height:'+$redactor.$editor.outerHeight()+'px;"></div>')
+									.before('<div id="ace-editor"></div>')
 									.hide();
 
 								var editor = ace.edit("ace-editor");
