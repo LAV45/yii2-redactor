@@ -8,19 +8,23 @@
  */
 
 namespace sim2github\imperavi\widgets;
+use Yii;
 use \yii\web\AssetBundle;
 
 class RedactorPluginAceEmmetExtAsset extends AssetBundle
 {
-	public $js = [
-		'//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js',
-		'//nightwing.github.io/emmet-core/emmet.js',
-		'//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ext-emmet.js',
-	];
 
 	public function init()
 	{
-		$this->sourcePath = null;
+		$this->js = [
+			YII_DEBUG ? 'ace.js' : '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js',
+			YII_DEBUG ? 'emmet.js' : '//nightwing.github.io/emmet-core/emmet.js',
+			YII_DEBUG ? 'ext-emmet.js' : '//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ext-emmet.js',
+			YII_DEBUG ? 'mode-html.js' : null,
+			YII_DEBUG ? 'theme-monokai.js' : null,
+		];
+		
+		$this->sourcePath = YII_DEBUG ? Yii::getAlias('@sim2github/imperavi/assets/ace') : null;
 	}
 
 }
