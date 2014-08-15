@@ -8,11 +8,10 @@ RedactorPlugins.ace = {
 	init: function()
 	{
 		var $redactor = this;
-
+			
 		this.buttonRemove('html');
 		this.buttonAddFirst('ace', 'Ace editor');
 		this.buttonGet('ace')
-			.addClass('re-html')
 			.click(
 				function(){
 					if ($redactor.opts.visual) {
@@ -21,6 +20,10 @@ RedactorPlugins.ace = {
 								$redactor.$source
 									.before('<div id="ace-editor"></div>')
 									.hide();
+								$redactor.buttonActive('ace');
+								$redactor.$toolbar
+									.find('a.re-ace')
+									.removeClass('redactor_button_disabled');
 
 								var editor = ace.edit("ace-editor");
 								// Settings
@@ -41,6 +44,7 @@ RedactorPlugins.ace = {
 					} else {
 						$redactor.toggleVisual();
 						$redactor.$box.find('#ace-editor').remove();
+						$redactor.buttonInactive('ace');
 
 
 					}
