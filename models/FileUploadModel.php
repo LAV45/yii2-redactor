@@ -19,20 +19,20 @@ use \yii\base\Model;
  */
 class FileUploadModel extends Model
 {
-	/**
-	 * @var string
-	 */
-	public $file;
-	/**
-	 * @var string
-	 */
-	public $uploadDir;
+    /**
+     * @var string
+     */
+    public $file;
+    /**
+     * @var string
+     */
+    public $uploadDir;
 
 
-	/**
-	 * @return array
-	 */
-	public function rules()
+    /**
+     * @return array
+     */
+    public function rules()
     {
         return [
             ['uploadDir', 'required'],
@@ -40,10 +40,10 @@ class FileUploadModel extends Model
         ];
     }
 
-	/**
-	 * @return bool
-	 */
-	public function upload()
+    /**
+     * @return bool
+     */
+    public function upload()
     {
         if ($this->validate() && !is_null(UploadedFile::getInstanceByName('file'))) {
             return UploadedFile::getInstanceByName('file')->saveAs($this->getPath(), true);
@@ -51,18 +51,18 @@ class FileUploadModel extends Model
         return false;
     }
 
-	/**
-	 * @return JSON
-	 */
-	public function toJson()
+    /**
+     * @return JSON
+     */
+    public function toJson()
     {
         return Json::encode(['filelink' => $this->getUrl(), 'filename' => $this->normalizeFilename()]);
     }
 
-	/**
-	 * @return string
-	 */
-	public function getPath()
+    /**
+     * @return string
+     */
+    public function getPath()
     {
         if (Yii::$app->user->isGuest) {
             $path = Yii::getAlias($this->uploadDir) . DIRECTORY_SEPARATOR . 'guest';
@@ -73,19 +73,19 @@ class FileUploadModel extends Model
         return $path . DIRECTORY_SEPARATOR . $this->normalizeFilename();
     }
 
-	/**
-	 * @return string
-	 */
-	public function getUrl()
+    /**
+     * @return string
+     */
+    public function getUrl()
     {
         return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $this->getPath());
     }
 
 
-	/**
-	 * @return string
-	 */
-	protected function normalizeFilename()
+    /**
+     * @return string
+     */
+    protected function normalizeFilename()
     {
         return  Inflector::slug(UploadedFile::getInstanceByName('file')->getBaseName()) . '.'
         . UploadedFile::getInstanceByName('file')->getExtension();

@@ -18,30 +18,30 @@ use \yii\base\Action;
  */
 class ImageGetJsonAction extends Action
 {
-	/**
-	 * @var string
-	 */
-	public $sourcePath = '@webroot/uploads';
+    /**
+     * @var string
+     */
+    public $sourcePath = '@webroot/uploads';
 
-	/**
-	 * @throws \yii\web\HttpException
-	 */
-	public function init()
+    /**
+     * @throws \yii\web\HttpException
+     */
+    public function init()
     {
         if (!Yii::$app->request->isAjax) {
             throw new HttpException(403, 'This action allow only ajaxRequest');
         }
-	    if (parse_url(Yii::$app->request->referrer,PHP_URL_HOST) !== Yii::$app->request->serverName){
-			throw new HttpException(403, 'This action allow only from ' . Yii::$app->request->serverName . ' server');
-	    };
+        if (parse_url(Yii::$app->request->referrer,PHP_URL_HOST) !== Yii::$app->request->serverName){
+            throw new HttpException(403, 'This action allow only from ' . Yii::$app->request->serverName . ' server');
+        };
     }
 
 
-	public function run()
+    public function run()
     {
         $files = FileHelper::findFiles($this->getPath(), ['recursive' => true, 'only' => ['*.jpg', '*.jpeg', '*.jpe', '*.png', '*.gif']]);
 
-	    if (is_array($files) && count($files)) {
+        if (is_array($files) && count($files)) {
             $result = [];
             foreach ($files as $file) {
                 $url = $this->getUrl($file);
@@ -51,25 +51,25 @@ class ImageGetJsonAction extends Action
         }
     }
 
-	/**
-	 * @return string
-	 */
-	protected function getPath()
+    /**
+     * @return string
+     */
+    protected function getPath()
     {
         if (Yii::$app->user->isGuest) {
-            return Yii::getAlias($this->sourcePath) . DIRECTORY_SEPARATOR . 'guest';
+            return Yii::getAlias($this->sourcePath) . '/' . 'guest';
         } else {
-            return Yii::getAlias($this->sourcePath) . DIRECTORY_SEPARATOR . Yii::$app->user->id;
+            return Yii::getAlias($this->sourcePath) . '/' . Yii::$app->user->id;
         }
     }
 
-	/**
-	 * @param $path
-	 * @return string
-	 */
-	public function getUrl($path)
+    /**
+     * @param $path
+     * @return string
+     */
+    public function getUrl($path)
     {
-	    return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $path);
+        return Yii::getAlias('@web').str_replace(Yii::getAlias('@webroot'), '', $path);
     }
 
 }
