@@ -10,6 +10,8 @@ use Yii;
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use yii\web\JsExpression;
 
 /**
@@ -34,89 +36,92 @@ class Redactor extends InputWidget
 	 * Init default options and register JS
 	 */
 	public function init()
-    {
-	    parent::init();
+		{
+			parent::init();
 
-        if ($this->hasModel()) {
-            $this->options['id'] = Html::getInputId($this->model, $this->attribute);
-        } else {
-            $this->options['id'] = $this->getId();
-        }
+				if ($this->hasModel()) {
+						$this->options['id'] = Html::getInputId($this->model, $this->attribute);
+				} else {
+						$this->options['id'] = $this->getId();
+				}
 
-	    //Defaults
-	    $this->clientOptions['lang'] = isset($this->clientOptions['lang']) ? $this->clientOptions['lang'] : Yii::$app->language;
-	    $this->clientOptions['convertImageLinks'] = isset($this->clientOptions['convertImageLinks']) ? $this->clientOptions['convertImageLinks'] : true;
-	    $this->clientOptions['convertVideoLinks'] = isset($this->clientOptions['convertVideoLinks']) ? $this->clientOptions['convertVideoLinks'] : true;
-	    $this->clientOptions['linkEmail'] = isset($this->clientOptions['linkEmail']) ? $this->clientOptions['linkEmail'] : true;
+			//[Default settings](http://imperavi.com/redactor/docs/settings/)
+			$clientDefaultOptions = [
+					'lang' => Yii::$app->language,
+					'convertImageLinks' => true,
+					'convertVideoLinks' => true,
+					'linkEmail' => true,
+					'imageGetJson' => Yii::getAlias('@web') . Url::to('/redactor/upload/imagejson'),
+					'imageUpload' => Yii::getAlias('@web') . Url::to('/redactor/upload/image'),
+					'clipboardUploadUrl' => Yii::getAlias('@web') . Url::to('/redactor/upload/clipboard'),
+					'fileUpload' => Yii::getAlias('@web') . Url::to('/redactor/upload/file'),
+			];
 
-	    $this->clientOptions['imageGetJson'] = isset($this->clientOptions['imageGetJson']) ? $this->clientOptions['imageGetJson'] : Yii::getAlias('@web').'/redactor/upload/imagejson';
-	    $this->clientOptions['imageUpload'] = isset($this->clientOptions['imageUpload']) ? $this->clientOptions['imageUpload'] : Yii::getAlias('@web').'/redactor/upload/image';
-	    $this->clientOptions['clipboardUploadUrl'] = isset($this->clientOptions['clipboardUploadUrl']) ? $this->clientOptions['clipboardUploadUrl']: Yii::getAlias('@web').'/redactor/upload/clipboard';
-	    $this->clientOptions['fileUpload'] = isset($this->clientOptions['fileUpload']) ? $this->clientOptions['fileUpload']: Yii::getAlias('@web').'/redactor/upload/file';
+			$this->clientOptions = ArrayHelper::merge($clientDefaultOptions,$this->clientOptions);
 
-	    if ($this->clientOptions['imageUpload']) {
-            $this->clientOptions['imageUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
-        }
+			if ($this->clientOptions['imageUpload']) {
+						$this->clientOptions['imageUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
+				}
 
-	    if ($this->clientOptions['fileUpload']) {
-            $this->clientOptions['fileUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
-        }
+			if ($this->clientOptions['fileUpload']) {
+						$this->clientOptions['fileUploadErrorCallback'] = new JsExpression("function(json){alert(json.error);}");
+				}
 
-	    //CallBacks to test
-	    if($this->options['debug'] = true){
-		    $this->clientOptions['imageUploadCallback'] = new JsExpression("function(image, json) { console.log(json); }");
-	    }
+			//CallBacks to test
+			if($this->options['debug'] = true){
+				$this->clientOptions['imageUploadCallback'] = new JsExpression("function(image, json) { console.log(json); }");
+			}
 
-	    //csrf token
-	    $request = Yii::$app->getRequest();
-	    $this->clientOptions['uploadFields'] = [$request->csrfParam=>$request->getCsrfToken()];
-	    
-	    $this->registerBundles();
-        $this->registerScript();
-    }
+			//csrf token
+			$request = Yii::$app->getRequest();
+			$this->clientOptions['uploadFields'] = [$request->csrfParam=>$request->getCsrfToken()];
+			
+			$this->registerBundles();
+				$this->registerScript();
+		}
 
 	/**
 	 *  Renders the widget
 	 */
 	public function run()
-    {
-        if ($this->hasModel()) {
-            echo Html::activeTextarea($this->model, $this->attribute, $this->options);
-        } else {
-            echo Html::textarea($this->name, $this->value, $this->options);
-        }
-    }
+		{
+				if ($this->hasModel()) {
+						echo Html::activeTextarea($this->model, $this->attribute, $this->options);
+				} else {
+						echo Html::textarea($this->name, $this->value, $this->options);
+				}
+		}
 
 
 	/**
 	 * Register additional JS for Imperavei Redactor
 	 */
 	public function registerBundles()
-    {
-        RedactorAsset::register($this->getView());
+		{
+				RedactorAsset::register($this->getView());
 
 		if ($this->clientOptions['lang'] != 'en'){
-			RedactorRegionalAsset::register($this->getView())->js[] = 'lang/' . $this->clientOptions['lang']  . '.js';
+			RedactorRegionalAsset::register($this->getView())->js[] = 'lang/' . $this->clientOptions['lang'] . '.js';
 		}
 
-        if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {
-            foreach ($this->clientOptions['plugins'] as $plugin) {
-                $assetBundle = 'sim2github\imperavi\widgets\RedactorPlugin' . ucfirst($plugin) . 'Asset';
-	            if (class_exists($assetBundle)) {
-		            $assetBundle::register($this->getView());
-                }
-            }
-        }
-    }
+				if (isset($this->clientOptions['plugins']) && count($this->clientOptions['plugins'])) {
+						foreach ($this->clientOptions['plugins'] as $plugin) {
+								$assetBundle = 'sim2github\imperavi\widgets\RedactorPlugin' . ucfirst($plugin) . 'Asset';
+							if (class_exists($assetBundle)) {
+								$assetBundle::register($this->getView());
+								}
+						}
+				}
+		}
 
 
 	/**
 	 * Register redactor JS init
 	 */
 	public function registerScript()
-    {
-        $clientOptions = (count($this->clientOptions)) ? Json::encode($this->clientOptions) : '';
-        $this->getView()->registerJs("jQuery('#{$this->options['id']}').redactor({$clientOptions});");
-    }
+		{
+				$clientOptions = (count($this->clientOptions)) ? Json::encode($this->clientOptions) : '';
+				$this->getView()->registerJs("jQuery('#{$this->options['id']}').redactor({$clientOptions});");
+		}
 
 }
